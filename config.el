@@ -39,6 +39,16 @@
 ;; Use visual line mode by default (line wrapping)
 (global-visual-line-mode t)
 
+;; Add yadm functionality to magit
+(require 'tramp)
+(add-to-list 'tramp-methods
+ '("yadm"
+   (tramp-login-program "yadm")
+   (tramp-login-args (("enter")))
+   (tramp-login-env (("SHELL") ("/bin/sh")))
+   (tramp-remote-shell "/bin/sh")
+   (tramp-remote-shell-args ("-c"))))
+(map! :leader "g." (cmd! (magit-status "/yadm::")))
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
